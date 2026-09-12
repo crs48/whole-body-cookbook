@@ -1,0 +1,42 @@
+{
+  "lexicon": 1,
+  "id": "app.wholebodycookbook.recipe",
+  "defs": {
+    "main": {
+      "type": "record",
+      "description": "A whole-body recipe linking a condition or tradition to body regions and social threads.",
+      "key": "tid",
+      "record": {
+        "type": "object",
+        "required": ["title", "createdAt"],
+        "properties": {
+          "title": { "type": "string", "maxGraphemes": 80, "maxLength": 800 },
+          "summary": { "type": "string", "maxGraphemes": 500, "maxLength": 5000 },
+          "topic": { "type": "string" },
+          "regions": { "type": "array", "items": { "type": "string" } },
+          "ingredients": { "type": "array", "items": { "type": "ref", "ref": "#ingredient" } },
+          "links": { "type": "array", "items": { "type": "ref", "ref": "#link" } },
+          "createdAt": { "type": "string", "format": "datetime" }
+        }
+      }
+    },
+    "ingredient": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string" },
+        "kind": { "type": "string", "knownValues": ["practice", "food", "community", "tradition", "modality", "body-system", "question"] },
+        "note": { "type": "string" }
+      }
+    },
+    "link": {
+      "type": "object",
+      "required": ["href"],
+      "properties": {
+        "href": { "type": "string", "format": "uri" },
+        "label": { "type": "string" },
+        "network": { "type": "string", "knownValues": ["bluesky", "web", "book", "other"] }
+      }
+    }
+  }
+}
