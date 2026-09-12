@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Whole Body Cookbook</title>
+  <meta name="description" content="An AT Protocol atlas: pin Bluesky posts to the body. Meridians, nerves, conditions, and traditions on one figure."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="./styles.css"/>
+</head>
+<body>
+  <header class="site-header">
+    <div class="mark">
+      <b>Whole Body Cookbook</b>
+      <span>an ATProto atlas</span>
+    </div>
+    <nav>
+      <button type="button" data-go="atlas">Atlas</button>
+      <button type="button" data-go="topics">Recipes</button>
+      <button type="button" data-go="protocol">On AT Protocol</button>
+      <button type="button" data-go="about">About</button>
+    </nav>
+  </header>
+  <main class="layout">
+    <section class="stage">
+      <div class="stage-tools">
+        <button class="chip meridian" id="layer-meridians" type="button" aria-pressed="true">Meridians</button>
+        <button class="chip nerve" id="layer-nerves" type="button" aria-pressed="false">Nervous system</button>
+      </div>
+      <div class="figure-wrap" id="figure"></div>
+    </section>
+    <aside class="panel">
+      <div class="page on" data-page="atlas">
+        <p class="kicker" id="panel-kicker">Body region</p>
+        <h1 id="panel-title">Heart</h1>
+        <p class="lede" id="panel-lede"></p>
+        <div class="meta-row" id="panel-meta"></div>
+        <div class="meta-row" id="panel-topics"></div>
+        <div class="compose">
+          <label for="compose-text">Pin this region on Bluesky</label>
+          <textarea id="compose-text" maxlength="300"></textarea>
+          <div class="compose-actions">
+            <button class="btn bsky" id="btn-compose" type="button">Open Bluesky composer</button>
+            <button class="btn ghost" id="btn-refresh" type="button">Refresh feed</button>
+            <span class="count" id="char-count">0/300</span>
+          </div>
+          <p class="status" id="search-status"></p>
+        </div>
+        <h2>Pinned here</h2>
+        <div class="feed" id="feed"></div>
+        <p class="disclaimer">This is a map of conversations, not a clinic. Nothing here diagnoses, treats, or replaces care. Folk correspondences sit beside lived-experience tags so they can be compared, not collapsed.</p>
+      </div>
+      <div class="page" data-page="topics">
+        <p class="kicker">The cookbook</p>
+        <h1>Recipes</h1>
+        <p class="lede">Each recipe is a bundle: a condition or tradition, the body rooms it tends to occupy, and the Bluesky threads already talking there.</p>
+        <div class="topic-grid" id="topic-grid"></div>
+      </div>
+      <div class="page protocol" data-page="protocol">
+        <p class="kicker">Atmosphere</p>
+        <h1>On AT Protocol</h1>
+        <p>Whole Body Cookbook is meant to live in the Atmosphere, not as a silo. The first version uses ordinary Bluesky posts so anything you pin is already visible in the main app. A custom lexicon rides alongside for apps that know how to read a body.</p>
+        <h2>1. Dual-write</h2>
+        <p>You publish an <span class="mono">app.bsky.feed.post</span> with hashtags <span class="mono">#WholeBodyCookbook</span> and a region tag such as <span class="mono">#wbc-heart</span>. That post is a first-class Bluesky object.</p>
+        <p>Optionally you also write <span class="mono">app.wholebodycookbook.pin</span> into your own repo. Other Atmosphere apps can index the collection without scraping hashtags.</p>
+        <h2>2. Lexicons in this repo</h2>
+        <pre>lexicons/app.wholebodycookbook.pin.json
+lexicons/app.wholebodycookbook.recipe.json</pre>
+        <p>To publish the lexicon under a real NSID you will want a domain you control and a DNS TXT proof pointing the namespace at your DID. Until then the schema is a proposal the site already understands.</p>
+        <h2>3. What comes next</h2>
+        <p>OAuth sign-in (Statusphere pattern) so the site can write the custom record for you. A Jetstream consumer. A custom Bluesky feed. Later a 3D BodyParts3D figure with the same region ids.</p>
+      </div>
+      <div class="page about" data-page="about">
+        <p class="kicker">Colophon</p>
+        <h1>About</h1>
+        <p>The fantasy is a kitchen where Chinese medicine, dysautonomia Bluesky, astrology, human design, homeopathy, and mobility culture can leave notes on the same body without having to agree.</p>
+        <p>Source lives at <a href="https://github.com/crs48/whole-body-cookbook">github.com/crs48/whole-body-cookbook</a>.</p>
+        <p class="disclaimer">Correspondences are historical and communal, not clinical claims. If you are in crisis in the US, call or text 988.</p>
+      </div>
+    </aside>
+  </main>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
