@@ -2,5 +2,8 @@
 .env
 .env.local
 node_modules/
-.tap-data/
 dist/
+.tap-data/
+*.local
+.claude/
+.playwright-mcp/
