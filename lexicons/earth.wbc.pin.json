@@ -1,0 +1,43 @@
+{
+  "lexicon": 1,
+  "id": "earth.wbc.pin",
+  "defs": {
+    "main": {
+      "type": "record",
+      "description": "A pin placing a note, recipe, or Bluesky post onto a region of the body. Region ids are the Whole Body Cookbook atlas ids and match the #wbc-* hashtags.",
+      "key": "tid",
+      "record": {
+        "type": "object",
+        "required": ["region", "createdAt"],
+        "properties": {
+          "region": {
+            "type": "string",
+            "description": "Canonical body region id from the Whole Body Cookbook atlas.",
+            "knownValues": [
+              "crown", "brain", "face", "throat", "heart", "lungs", "solar-plexus", "stomach",
+              "liver", "spleen", "intestines", "kidneys", "spine", "pelvis", "left-arm", "right-arm",
+              "hands", "left-leg", "right-leg", "feet", "skin", "autonomic", "whole"
+            ]
+          },
+          "side": { "type": "string", "knownValues": ["left", "right", "midline", "bilateral"] },
+          "systems": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "knownValues": [
+                "nervous", "meridian", "endocrine", "cardiovascular", "digestive", "respiratory",
+                "immune", "musculoskeletal", "fascia", "lymph", "energetic"
+              ]
+            }
+          },
+          "meridians": { "type": "array", "items": { "type": "string" } },
+          "topics": { "type": "array", "items": { "type": "string" } },
+          "text": { "type": "string", "maxGraphemes": 300, "maxLength": 3000 },
+          "post": { "type": "string", "format": "at-uri", "description": "The app.bsky.feed.post this pin annotates, if any." },
+          "tags": { "type": "array", "items": { "type": "string", "maxGraphemes": 64, "maxLength": 640 } },
+          "createdAt": { "type": "string", "format": "datetime" }
+        }
+      }
+    }
+  }
+}
